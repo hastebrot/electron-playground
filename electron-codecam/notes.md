@@ -1,5 +1,9 @@
 # notes
 
+## electron
+
+- https://github.com/electron/electron-quick-start
+
 ## macos native window
 
 - https://github.com/electron/electron/blob/master/docs/api/browser-window.md
