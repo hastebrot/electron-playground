@@ -12,5 +12,8 @@
   "license": "",
   "devDependencies": {
     "electron": "~1.7.9"
+  },
+  "dependencies": {
+    "mousetrap": "^1.6.1"
   }
 }

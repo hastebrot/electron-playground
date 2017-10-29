@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Electron CodeCam</title>
@@ -10,11 +11,14 @@
       padding: 0;
       overflow: hidden;
       -webkit-app-region: drag;
-      background-color: #666;
+      /* background-color: #666; */
+      background: rgba(0, 0, 0, 0);
     }
+
     main {
       margin: 0 auto;
     }
+
     main video {
       position: absolute;
       width: 100%;
@@ -22,54 +26,86 @@
       left: 0;
       top: 0;
     }
-    .rotate {
+
+    .fx-rotated {
       transform: rotate(180deg);
     }
-    .grayscale {
+
+    .fx-grayscale {
       filter: grayscale(1);
     }
+
+    .fx-profile {
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #ddd;
+      /* padding: 3px; */
+      top: -3px;
+      left: -3px;
+
+      width: 100vmin;
+      height: 100vmin;
+      transform: scale(0.95);
+      transform-origin: center;
+    }
+
     main .logo {
-      width: 1023px;
-      height: 248px;
-      /* width: 2000px;
-      height: 487px; */
       content: "";
       z-index: 1;
-      /* background-size: 100px; */
-      background-size: 25px;
-      background-position: 15px 15px;
       opacity: 0.75;
-      /* transform: rotate(45deg);
-      left: 0;
+      /* left: 0;
       top: 0; */
     }
+
+    main .logo.hidden {
+      visibility: hidden;
+    }
+
     .arte {
-      /* background: url(../img/logos_other/670px-Arte_HD_Logo2.svg1.png) no-repeat; */
       background: url(../img/logos/Arte_Logo_2017.svg.png) no-repeat;
+      background-position: 15px 15px;
+      background-size: 25px;
+      width: 1023px;
+      height: 248px;
+    }
+
+    .arte-hd {
+      background: url(../img/logos_more/670px-Arte_HD_Logo2.svg1.png) no-repeat;
+      background-position: 15px 15px;
+      background-size: 100px;
+      width: 2000px;
+      height: 487px;
     }
   </style>
 </head>
 
 <body>
   <main>
-    <video class="grayscalex rotatex" autoplay="true"></video>
-    <div class="logo arte"></div>
+    <video class="_fx-grayscale _fx-rotated _fx-profile" autoplay="true"></video>
+    <div class="logo arte-hd"></div>
   </main>
 </body>
 
 <script>
-  var video = document.querySelector("main video");
+  const video = document.querySelector("main video")
+  const logo = document.querySelector("main .logo")
+
+  const Mousetrap = require("mousetrap")
+  Mousetrap.bind("1", () => { logo.classList.toggle("hidden") })
+  Mousetrap.bind("2", () => { video.classList.toggle("fx-grayscale") })
+  Mousetrap.bind("3", () => { video.classList.toggle("fx-rotated") })
+  Mousetrap.bind("4", () => { video.classList.toggle("fx-profile") })
 
   function handleVideo(stream) {
-    video.src = window.URL.createObjectURL(stream);
+    video.src = window.URL.createObjectURL(stream)
   }
   function handleError() { }
 
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
-                           navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
   if (navigator.getUserMedia) {
-    navigator.getUserMedia({ video: true }, handleVideo, handleError);
+    navigator.getUserMedia({ video: true }, handleVideo, handleError)
   }
 </script>
 
@@ -77,4 +113,5 @@
   // You can also require other files to run in this process.
   require("./renderer.js")
 </script>
+
 </html>

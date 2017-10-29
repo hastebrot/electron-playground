@@ -16,7 +16,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 400, height: 300,
     frame: false, hasShadow: false, darkTheme: true,
-    transparent: true, type: "desktop"
+    transparent: true
   })
 
   mainWindow.setAlwaysOnTop(true, "floating")
