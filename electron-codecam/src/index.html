@@ -19,7 +19,7 @@
       margin: 0 auto;
     }
 
-    main video {
+    main #video {
       position: absolute;
       width: 100%;
       height: 100%;
@@ -27,21 +27,21 @@
       top: 0;
     }
 
-    .fx-rotated {
+    main #video.rotated {
       transform: rotate(180deg);
     }
 
-    .fx-grayscale {
+    main #video.grayscale {
       filter: grayscale(1);
     }
 
-    .fx-profile {
+    main #video.profile {
       object-fit: cover;
       border-radius: 50%;
-      border: 3px solid #ddd;
+      border: 4px solid #ddd;
       /* padding: 3px; */
-      top: -3px;
-      left: -3px;
+      top: -4px;
+      left: -4px;
 
       width: 100vmin;
       height: 100vmin;
@@ -49,7 +49,7 @@
       transform-origin: center;
     }
 
-    main .logo {
+    main #logo {
       content: "";
       z-index: 1;
       opacity: 0.75;
@@ -57,11 +57,11 @@
       top: 0; */
     }
 
-    main .logo.hidden {
+    main #logo.hidden {
       visibility: hidden;
     }
 
-    .arte {
+    main #logo.arte {
       background: url(../img/logos/Arte_Logo_2017.svg.png) no-repeat;
       background-position: 15px 15px;
       background-size: 25px;
@@ -69,7 +69,7 @@
       height: 248px;
     }
 
-    .arte-hd {
+    main #logo.arte-hd {
       background: url(../img/logos_more/670px-Arte_HD_Logo2.svg1.png) no-repeat;
       background-position: 15px 15px;
       background-size: 100px;
@@ -81,20 +81,20 @@
 
 <body>
   <main>
-    <video class="_fx-grayscale _fx-rotated _fx-profile" autoplay="true"></video>
-    <div class="logo arte-hd"></div>
+    <video id="video" class="grayscalex rotatedx profilex" autoplay="true"></video>
+    <div id="logo" class="hidden arte-hd"></div>
   </main>
 </body>
 
 <script>
-  const video = document.querySelector("main video")
-  const logo = document.querySelector("main .logo")
+  const video = document.querySelector("#video")
+  const logo = document.querySelector("#logo")
 
   const Mousetrap = require("mousetrap")
   Mousetrap.bind("1", () => { logo.classList.toggle("hidden") })
-  Mousetrap.bind("2", () => { video.classList.toggle("fx-grayscale") })
-  Mousetrap.bind("3", () => { video.classList.toggle("fx-rotated") })
-  Mousetrap.bind("4", () => { video.classList.toggle("fx-profile") })
+  Mousetrap.bind("2", () => { video.classList.toggle("grayscale") })
+  Mousetrap.bind("3", () => { video.classList.toggle("rotated") })
+  Mousetrap.bind("4", () => { video.classList.toggle("profile") })
 
   function handleVideo(stream) {
     video.src = window.URL.createObjectURL(stream)
