@@ -19,6 +19,12 @@
       margin: 0 auto;
     }
 
+    main.border {
+      content: "";
+      border: 4px solid #ddd;
+      z-index: 10;
+    }
+
     main #video {
       position: absolute;
       width: 100%;
@@ -33,6 +39,10 @@
 
     main #video.grayscale {
       filter: grayscale(1);
+    }
+
+    main #video.hidden {
+      display: none;
     }
 
     main #video.profile {
@@ -80,7 +90,7 @@
 </head>
 
 <body>
-  <main>
+  <main class="border">
     <video id="video" class="grayscalex rotatedx profilex" autoplay="true"></video>
     <div id="logo" class="hidden arte-hd"></div>
   </main>
@@ -89,24 +99,49 @@
 <script>
   const video = document.querySelector("#video")
   const logo = document.querySelector("#logo")
+  let videoStream = null
+  let videoPlayed = true
 
   const Mousetrap = require("mousetrap")
   Mousetrap.bind("1", () => { logo.classList.toggle("hidden") })
   Mousetrap.bind("2", () => { video.classList.toggle("grayscale") })
   Mousetrap.bind("3", () => { video.classList.toggle("rotated") })
   Mousetrap.bind("4", () => { video.classList.toggle("profile") })
+  Mousetrap.bind("q", () => { window.close() })
+  Mousetrap.bind("h", () => {
+    if (!video.classList.contains("hidden")) {
+      stopWebcam()
+    }
+    else {
+      startWebcam()
+    }
+    video.classList.toggle("hidden")
+  })
 
   function handleVideo(stream) {
+    videoStream = stream
     video.src = window.URL.createObjectURL(stream)
   }
+
   function handleError() { }
 
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-  if (navigator.getUserMedia) {
-    navigator.getUserMedia({ video: true }, handleVideo, handleError)
+  function startWebcam() {
+    if (navigator.getUserMedia) {
+      navigator.getUserMedia({ video: true }, handleVideo, handleError)
+    }
   }
+
+  function stopWebcam() {
+    const track = videoStream.getTracks()[0]
+    video.pause()
+    video.src = ""
+    track.stop()
+  }
+
+  startWebcam()
 </script>
 
 <script>
