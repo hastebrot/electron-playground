@@ -1,7 +1,15 @@
 # notes
 
+## start codecam
+
+~~~sh
+$ yarn
+$ yarn start
+~~~
+
 ## electron
 
+- https://github.com/electron/electron/releases
 - https://github.com/electron/electron-quick-start
 
 ## macos native window
