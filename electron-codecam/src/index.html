@@ -21,8 +21,8 @@
 
     main.border {
       content: "";
-      border: 4px solid #ddd;
       z-index: 10;
+      /* border: 4px solid #ddd; */
     }
 
     main #video {
@@ -111,6 +111,7 @@
   })
 
   const windowRatio = window.innerWidth / window.innerHeight
+  Mousetrap.bind("0", () => { resizeWindow(1.0, windowRatio) })
   Mousetrap.bind("+", () => { resizeWindow(1.1, windowRatio) })
   Mousetrap.bind("-", () => { resizeWindow(0.9, windowRatio) })
 
