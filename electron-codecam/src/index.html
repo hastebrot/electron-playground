@@ -97,16 +97,20 @@
 </body>
 
 <script>
+  const Mousetrap = require("mousetrap")
+
   const video = document.querySelector("#video")
   const logo = document.querySelector("#logo")
-  let videoStream = null
-  let videoPlayed = true
-
-  const Mousetrap = require("mousetrap")
   Mousetrap.bind("1", () => { logo.classList.toggle("hidden") })
   Mousetrap.bind("2", () => { video.classList.toggle("grayscale") })
   Mousetrap.bind("3", () => { video.classList.toggle("rotated") })
   Mousetrap.bind("4", () => { video.classList.toggle("profile") })
+
+  const windowRatio = window.innerWidth / window.innerHeight
+  Mousetrap.bind("+", () => { resizeWindow(1.1, windowRatio) })
+  Mousetrap.bind("-", () => { resizeWindow(0.9, windowRatio) })
+
+  let videoStream = null
   Mousetrap.bind("q", () => { window.close() })
   Mousetrap.bind("h", () => {
     if (!video.classList.contains("hidden")) {
@@ -117,6 +121,15 @@
     }
     video.classList.toggle("hidden")
   })
+
+  function resizeWindow(factor, ratio) {
+    const width = window.innerWidth
+    const height = window.innerHeight
+    window.resizeTo(
+      width * factor,
+      (width * factor) / ratio
+    )
+  }
 
   function handleVideo(stream) {
     videoStream = stream
