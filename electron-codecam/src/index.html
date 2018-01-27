@@ -99,12 +99,16 @@
 <script>
   const Mousetrap = require("mousetrap")
 
+  const main = document.querySelector("main")
   const video = document.querySelector("#video")
   const logo = document.querySelector("#logo")
   Mousetrap.bind("1", () => { logo.classList.toggle("hidden") })
   Mousetrap.bind("2", () => { video.classList.toggle("grayscale") })
   Mousetrap.bind("3", () => { video.classList.toggle("rotated") })
-  Mousetrap.bind("4", () => { video.classList.toggle("profile") })
+  Mousetrap.bind("4", () => {
+    video.classList.toggle("profile")
+    main.classList.toggle("border")
+  })
 
   const windowRatio = window.innerWidth / window.innerHeight
   Mousetrap.bind("+", () => { resizeWindow(1.1, windowRatio) })
