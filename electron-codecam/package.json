@@ -2,18 +2,18 @@
   "name": "electron-codecam",
   "version": "0.1.0",
   "description": "",
-  "main": "src/main.js",
-  "scripts": {
-    "start": "electron ."
-  },
   "private": true,
   "repository": "",
   "author": "",
-  "license": "",
-  "devDependencies": {
-    "electron": "2.0.0"
-  },
+  "license": "MIT license",
   "dependencies": {
-    "mousetrap": "1.6.1"
-  }
+    "mousetrap": "1.6.2"
+  },
+  "devDependencies": {
+    "electron": "3.0.0"
+  },
+  "scripts": {
+    "start": "electron ."
+  },
+  "main": "src/main.js"
 }
